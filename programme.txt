@@ -4,7 +4,13 @@ procedure principale()
   i = 12+3;
   si (i>14)
     j=1;
-k=j+i;
+    k=j+i;
   finsi
+  
+  j=0;
+  tantque (j != 3)
+    j = j+1;
+  fintantque
+
 finproc
 # Commentaire Final
