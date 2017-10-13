@@ -4,6 +4,7 @@
 // Contient toutes les déclarations de classes nécessaires
 //  pour représenter l'arbre abstrait
 
+
 #include <vector>
 #include <iostream>
 #include <iomanip>
@@ -116,6 +117,36 @@ private:
     Noeud* m_condition;
     Noeud* m_sequence;
 };
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+class NoeudInstSiRiche : public Noeud {
+    // Classe pour représenter un noeud "instruction si riche"
+    //et ses n fils : les conditions du tantque et les séquence d'instructions associées
+public:
+    NoeudInstSiRiche();
+    void ajoute(Noeud* instSi) override;
+    
+    ~NoeudInstSiRiche() {        
+    }
+    int executer() override;
+private:
+    vector<Noeud*> m_instSis;
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #endif /* ARBREABSTRAIT_H */

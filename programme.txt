@@ -11,6 +11,12 @@ procedure principale()
   tantque (j != 3)
     j = j+1;
   fintantque
-
+  si (j < 2)
+    j = 10;
+  sinonsi (j == 3)
+    j = 6;
+  sinon
+    j = 100;
+  fin si
 finproc
 # Commentaire Final

@@ -1,6 +1,8 @@
 #include "Interpreteur.h"
 #include <stdlib.h>
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 Interpreteur::Interpreteur(ifstream & fichier) :
@@ -154,3 +156,29 @@ Noeud* Interpreteur::instTantQue(){
     return new NoeudInstTantQue(condition,sequence);
 }
 
+Noeud* Interpreteur::instSiRiche() {
+    // <instSiRiche> ::= si( <expression> ) <seqInst> { sinonsi ( <expression> ) <seqInst> } [ sinon <sequinst> ] finsi
+    
+    testerEtAvancer("si");
+    testerEtAvancer("(");
+    NoeudInstSiRiche* siRiche = new NoeudInstSiRiche();
+    Noeud* condition = expression();                // on mémorise la condition
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();                    // on mémorise la séquence d'instruction
+    siRiche->ajoute(new NoeudInstSi(condition, sequence));
+    while(  m_lecteur.getSymbole() == "sinonsi") {  // on mémorise les conditions et les instructions pour les sinons
+        m_lecteur.avancer();                        // on fait avancer le lecteur sur le symbole suivant
+        testerEtAvancer("(");
+        condition = expression();
+        testerEtAvancer(")");
+        sequence = seqInst();
+        siRiche->ajoute(new NoeudInstSi(condition, sequence));   
+    }
+    if (m_lecteur.getSymbole() == "sinon") {        // si il y a un sinon on ajoute la condition et la séquence d'instruction
+        m_lecteur.avancer();
+        sequence = seqInst();
+        siRiche -> ajoute(new NoeudInstSi(1, sequence));    //toujours vrais
+    }
+    testerEtAvancer("finsi");                      //on vérifie que le si se termine bien;
+    return siRiche;
+}

@@ -76,8 +76,11 @@ NoeudInstSi::NoeudInstSi(Noeud* condition, Noeud* sequence)
 }
 
 int NoeudInstSi::executer() {
-    if (m_condition->executer()) m_sequence->executer();
-    return 0; // La valeur renvoyée ne représente rien !
+    if (m_condition->executer()) {
+        m_sequence->executer();
+        return 1;                   // on retourne 1 si le si est exécuté
+    }
+    return 0;                       // on retourne 0 sinon
 }
 
 NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence)
@@ -88,4 +91,21 @@ int NoeudInstTantQue::executer() {
     while (m_condition->executer()) {
         m_sequence->executer();
     }
+    return 0;
+}
+
+NoeudInstSiRiche::NoeudInstSiRiche() 
+: m_instSis() {
+}
+
+void NoeudInstSiRiche::ajoute(Noeud* instSi) {
+    m_instSis.push_back(instSi);
+}
+
+int NoeudInstSiRiche::executer() {
+    int exec, i = 0;
+    while(i < m_instSis.size() && !exec) {            // on parcours le tableau et on vérifie que aucun si n'a été exécuté (exec = 0)
+        exec = m_instSis[i] -> executer();
+    }
+    return 0;
 }

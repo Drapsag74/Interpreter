@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=tp05
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/tp05
+CND_ARTIFACT_NAME_Debug=schoolcompiler
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/schoolcompiler
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=tp05.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/tp05.tar
+CND_PACKAGE_NAME_Debug=schoolcompiler.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/schoolcompiler.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=tp05
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/tp05
+CND_ARTIFACT_NAME_Release=schoolcompiler
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/schoolcompiler
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=tp05.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/tp05.tar
+CND_PACKAGE_NAME_Release=schoolcompiler.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/schoolcompiler.tar
 #
 # include compiler specific variables
 #
