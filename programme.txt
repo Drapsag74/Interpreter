@@ -8,15 +8,23 @@ procedure principale()
   finsi
   
   j=0;
-  tantque (j != 3)
+  tantque (j != 36)
     j = j+1;
   fintantque
+
   si (j < 2)
     j = 10;
   sinonsi (j == 3)
     j = 6;
   sinon
     j = 100;
-  fin si
+  finsi
+
+  z = 6;
+
+  repeter
+    z = z+1;
+  jusqua (z != 10)
+
 finproc
 # Commentaire Final

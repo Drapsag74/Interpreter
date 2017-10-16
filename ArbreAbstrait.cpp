@@ -83,6 +83,10 @@ int NoeudInstSi::executer() {
     return 0;                       // on retourne 0 sinon
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstTantQue
+////////////////////////////////////////////////////////////////////////////////
+
 NoeudInstTantQue::NoeudInstTantQue(Noeud* condition, Noeud* sequence)
 : m_condition(condition), m_sequence(sequence) {
 }
@@ -94,6 +98,10 @@ int NoeudInstTantQue::executer() {
     return 0;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstSiRiche
+////////////////////////////////////////////////////////////////////////////////
+
 NoeudInstSiRiche::NoeudInstSiRiche() 
 : m_instSis() {
 }
@@ -103,9 +111,26 @@ void NoeudInstSiRiche::ajoute(Noeud* instSi) {
 }
 
 int NoeudInstSiRiche::executer() {
-    int exec, i = 0;
-    while(i < m_instSis.size() && !exec) {            // on parcours le tableau et on vérifie que aucun si n'a été exécuté (exec = 0)
+    int exec=0;
+    for (int i=0; i < m_instSis.size() && !exec; i++) { // on parcours le tableau et on vérifie que aucun si n'a été exécuté (exec = 0)
         exec = m_instSis[i] -> executer();
     }
+    return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstRepeter
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstRepeter::NoeudInstRepeter(Noeud* condition, Noeud* sequence) 
+: m_condition(condition),m_sequence(sequence) {
+
+}
+int NoeudInstRepeter::executer(){
+    do {
+        m_sequence->executer();
+    }
+    while(m_condition->executer());
+    
     return 0;
 }

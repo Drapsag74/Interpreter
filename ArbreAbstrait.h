@@ -109,9 +109,8 @@ public:
     NoeudInstTantQue(Noeud* condition, Noeud* sequence);
     //construit une "instruction tantque" avec sa condition et sa sequence d'instruction
 
-    ~NoeudInstTantQue() {
-    } // A cause de la classe Noeud
-    int executer();
+    ~NoeudInstTantQue() {} // A cause de la classe Noeud
+    int executer() override;
 
 private:
     Noeud* m_condition;
@@ -128,25 +127,27 @@ public:
     NoeudInstSiRiche();
     void ajoute(Noeud* instSi) override;
     
-    ~NoeudInstSiRiche() {        
-    }
+    ~NoeudInstSiRiche() {}
     int executer() override;
 private:
     vector<Noeud*> m_instSis;
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
+class NoeudInstRepeter : public Noeud {
+    // Classe pour représenter un noeud "instruction repeter"
+    // elle contient la sequence d'unstruction et la condition
+    
+    public:
+        NoeudInstRepeter(Noeud* condition, Noeud* sequence);
+        ~NoeudInstRepeter(){}
+        int executer() override;
+        
+    private:
+        Noeud* m_condition;
+        Noeud* m_sequence;
+};
 
 #endif /* ARBREABSTRAIT_H */

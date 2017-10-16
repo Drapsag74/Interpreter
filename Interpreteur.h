@@ -36,6 +36,7 @@ private:
     Noeud*  instSi();      // <instSi> ::= si ( <expression> ) <seqInst> finsi
     Noeud*  instTantQue(); // <instTantQue> ::= si( <expression> ) <seqInst> { fin
     Noeud*  instSiRiche(); // <instSiRiche> ::= si( <expression> ) <seqInst> { sinonsi ( <expression> ) <seqInst> } [ sinon <sequinst> ] finsi
+    Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua (<expression>)
     
     
     
