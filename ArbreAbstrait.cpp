@@ -134,3 +134,20 @@ int NoeudInstRepeter::executer(){
     
     return 0;
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstPour
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstPour::NoeudInstPour(Noeud* affectation1, Noeud* affectation2, Noeud* condition, Noeud* sequence)
+: m_affectation1(affectation1), m_affectation2(affectation2), m_condition(condition),m_sequence(sequence) {
+    
+}
+
+int NoeudInstPour::executer(){
+    for(m_affectation1->executer(); m_condition->executer(); m_affectation2->executer()){
+        m_sequence->executer();
+    }
+    return 0;
+}

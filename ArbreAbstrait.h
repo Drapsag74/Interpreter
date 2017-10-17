@@ -149,5 +149,23 @@ class NoeudInstRepeter : public Noeud {
         Noeud* m_condition;
         Noeud* m_sequence;
 };
+////////////////////////////////////////////////////////////////////////////////
+
+class NoeudInstPour : public Noeud {
+    // Classe pour représenter un noeud "instruction pour"
+    // elle contient ...
+    
+    public:
+        NoeudInstPour(Noeud* affectation1, Noeud* affectation2, Noeud* condition, Noeud* sequence);
+        int executer() override;
+    
+    private:
+        Noeud* m_affectation1;
+        Noeud* m_affectation2;
+        Noeud* m_condition;
+        Noeud* m_sequence;
+};
+
 
 #endif /* ARBREABSTRAIT_H */
+

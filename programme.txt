@@ -25,6 +25,12 @@ procedure principale()
   repeter
     z = z+1;
   jusqua (z != 10)
+  
+  h=0;
+
+  pour( j = 0; j<5;  j = j+1)
+    h = h + 1;
+  finpour
 
 finproc
 # Commentaire Final

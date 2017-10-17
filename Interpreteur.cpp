@@ -61,7 +61,8 @@ Noeud* Interpreteur::seqInst() {
   } while ( m_lecteur.getSymbole() == "<VARIABLE>" || 
             m_lecteur.getSymbole() == "si" ||
             m_lecteur.getSymbole() == "tantque" ||
-            m_lecteur.getSymbole() == "repeter");
+            m_lecteur.getSymbole() == "repeter" ||
+            m_lecteur.getSymbole() == "pour");
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
   return sequence;
@@ -77,11 +78,14 @@ Noeud* Interpreteur::inst() {
   else if (m_lecteur.getSymbole() == "si"){
     return instSiRiche();
   }
-  else if(m_lecteur.getSymbole() == "tantque") {
+  else if (m_lecteur.getSymbole() == "tantque") {
       return instTantQue();
   }
-  else if(m_lecteur.getSymbole() == "repeter") {
+  else if (m_lecteur.getSymbole() == "repeter") {
       return instRepeter();
+  }
+  else if (m_lecteur.getSymbole() == "pour") {
+      return instPour();
   }
   // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
   else {
@@ -199,4 +203,32 @@ Noeud* Interpreteur::instRepeter() {
     Noeud* condition = expression();
     testerEtAvancer(")");
     return new NoeudInstRepeter(condition,sequence);
+}
+
+Noeud* Interpreteur::instPour() {
+    // <instPour> ::= pour ([ <affectation> ];<expression> ;[ <affectation> ])<seqInst> finpour
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    Noeud* affectation1 = nullptr;
+    if(m_lecteur.getSymbole() == "<VARIABLE>") {
+       affectation1 = affectation(); 
+    }
+    testerEtAvancer(";");
+    Noeud* condition = expression();
+    testerEtAvancer(";");
+    Noeud* affectation2 = nullptr;
+    if (m_lecteur.getSymbole() == "<VARIABLE>"){
+       affectation2 = affectation();
+    }
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");
+    return new NoeudInstPour(affectation1,affectation2,condition,sequence);
+}
+
+Noeud* Interpreteur::instEcrire() {
+    // <instEcrire>::= ecrire (<expression> | <chaine> { , <excpresison> | <chaine> } )
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+    
 }
