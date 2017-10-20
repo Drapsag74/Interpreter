@@ -109,7 +109,8 @@ public:
     NoeudInstTantQue(Noeud* condition, Noeud* sequence);
     //construit une "instruction tantque" avec sa condition et sa sequence d'instruction
 
-    ~NoeudInstTantQue() {} // A cause de la classe Noeud
+    ~NoeudInstTantQue() {
+    } // A cause de la classe Noeud
     int executer() override;
 
 private:
@@ -126,8 +127,9 @@ class NoeudInstSiRiche : public Noeud {
 public:
     NoeudInstSiRiche();
     void ajoute(Noeud* instSi) override;
-    
-    ~NoeudInstSiRiche() {}
+
+    ~NoeudInstSiRiche() {
+    }
     int executer() override;
 private:
     vector<Noeud*> m_instSis;
@@ -139,33 +141,51 @@ private:
 class NoeudInstRepeter : public Noeud {
     // Classe pour représenter un noeud "instruction repeter"
     // elle contient la sequence d'unstruction et la condition
-    
-    public:
-        NoeudInstRepeter(Noeud* condition, Noeud* sequence);
-        ~NoeudInstRepeter(){}
-        int executer() override;
-        
-    private:
-        Noeud* m_condition;
-        Noeud* m_sequence;
+
+public:
+    NoeudInstRepeter(Noeud* condition, Noeud* sequence);
+
+    ~NoeudInstRepeter() {
+    }
+    int executer() override;
+
+private:
+    Noeud* m_condition;
+    Noeud* m_sequence;
 };
 ////////////////////////////////////////////////////////////////////////////////
 
 class NoeudInstPour : public Noeud {
     // Classe pour représenter un noeud "instruction pour"
     // elle contient ...
-    
-    public:
-        NoeudInstPour(Noeud* affectation1, Noeud* affectation2, Noeud* condition, Noeud* sequence);
-        int executer() override;
-    
-    private:
-        Noeud* m_affectation1;
-        Noeud* m_affectation2;
-        Noeud* m_condition;
-        Noeud* m_sequence;
+
+public:
+    NoeudInstPour(Noeud* affectation1, Noeud* affectation2, Noeud* condition, Noeud* sequence);
+    int executer() override;
+
+private:
+    Noeud* m_affectation1;
+    Noeud* m_affectation2;
+    Noeud* m_condition;
+    Noeud* m_sequence;
 };
 
+class NoeudInstEcrire : public Noeud {
+    // Classe pour représenter un noeud "instrution écrire"
+    // elle contient ...
+
+public:
+    NoeudInstEcrire();
+    void ajoute(Noeud* param) override;
+    int executer() override;
+    virtual ~NoeudInstEcrire() {
+    }
+
+
+private:
+    vector<Noeud*> m_params;
+
+};
 
 #endif /* ARBREABSTRAIT_H */
 

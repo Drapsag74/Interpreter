@@ -32,5 +32,7 @@ procedure principale()
     h = h + 1;
   finpour
 
+  ecrire("Zakarya Khelif est le plus gentil des gentils #nohomo ", 3*4, " toast")
+
 finproc
 # Commentaire Final

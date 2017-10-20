@@ -3,6 +3,8 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+#include <iostream>
+#include <typeinfo>
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
@@ -148,6 +150,25 @@ NoeudInstPour::NoeudInstPour(Noeud* affectation1, Noeud* affectation2, Noeud* co
 int NoeudInstPour::executer(){
     for(m_affectation1->executer(); m_condition->executer(); m_affectation2->executer()){
         m_sequence->executer();
+    }
+    return 0;
+}
+
+NoeudInstEcrire::NoeudInstEcrire() {
+}
+
+void NoeudInstEcrire::ajoute(Noeud* param) {
+    m_params.push_back(param);
+}
+
+int NoeudInstEcrire::executer() {
+    for (auto param : m_params) {
+        if ( (typeid(*param)==typeid(SymboleValue)) && *((SymboleValue*)param)=="<CHAINE>" ) {
+            string chaine = ((SymboleValue*)param)->getChaine();
+            cout << chaine.substr(1,chaine.size()-2);
+        } else {
+           cout << param->executer();
+        }
     }
     return 0;
 }
