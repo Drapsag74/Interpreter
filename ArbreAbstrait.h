@@ -170,22 +170,37 @@ private:
     Noeud* m_sequence;
 };
 
+////////////////////////////////////////////////////////////////////////////////
 class NoeudInstEcrire : public Noeud {
     // Classe pour représenter un noeud "instrution écrire"
-    // elle contient ...
+    // elle contient un vecteur de parametres
 
 public:
     NoeudInstEcrire();
     void ajoute(Noeud* param) override;
     int executer() override;
-    virtual ~NoeudInstEcrire() {
-    }
-
-
+    virtual ~NoeudInstEcrire() {}
+    
 private:
     vector<Noeud*> m_params;
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+
+//pareil je me suis inspire de la classe lire avec un vecteur de variables
+//une fonction ajoute qui fonctionne de manière similaire à l'instruction ecrire
+class NoeudInstLire : public Noeud {
+    // Classe pour représenter un noeud "instrution écrire"
+    // elle contient ...
+public:
+    NoeudInstLire();
+    void ajoute(Noeud* var);
+    int executer() override;
+    virtual ~NoeudInstLire() {}
+    
+private:
+    vector<Noeud*> m_vars;
+};
 #endif /* ARBREABSTRAIT_H */
 

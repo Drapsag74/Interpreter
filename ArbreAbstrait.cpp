@@ -154,6 +154,10 @@ int NoeudInstPour::executer(){
     return 0;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstEcrire
+////////////////////////////////////////////////////////////////////////////////
+
 NoeudInstEcrire::NoeudInstEcrire() {
 }
 
@@ -172,3 +176,39 @@ int NoeudInstEcrire::executer() {
     }
     return 0;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstLire
+////////////////////////////////////////////////////////////////////////////////
+
+
+/*
+ * c'est ici que ca merde
+ * le probleme c'est que executer utlise cin sur un noeud ce qui n'est pas possible
+ * j'ai essaye d'ajouter un operator >> aux classes symbole et symbole value (pour saisir)
+ * mais ca n'a pas marché
+ * j'ai pense a faire en sorte que l'on controle si ce qu'on met dans lire est une varibale (normal)
+ * et apres on pouurait faire d'autres if pour chaque type de variable (char,string etc...)
+ * mais ca m'a l'air moche
+ */
+NoeudInstLire::NoeudInstLire() {
+
+}
+
+void NoeudInstLire::ajoute(Noeud* var) {
+    m_vars.push_back(var);
+}
+
+int NoeudInstLire::executer() {
+    for (auto var : m_vars) {
+        if ( (typeid(*var)==typeid(SymboleValue)) && *((SymboleValue*)var)=="<VARIABLE>" ) {
+            //string chaine = ((SymboleValue*)param)->getChaine();
+            //cin >> var;
+        } else {
+           //var >> var->executer();
+        }
+    }
+    return 0;
+}
+
+

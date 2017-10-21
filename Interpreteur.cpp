@@ -64,7 +64,8 @@ Noeud* Interpreteur::seqInst() {
             m_lecteur.getSymbole() == "tantque" ||
             m_lecteur.getSymbole() == "repeter" ||
             m_lecteur.getSymbole() == "pour" ||
-            m_lecteur.getSymbole() == "ecrire");
+            m_lecteur.getSymbole() == "ecrire" ||
+            m_lecteur.getSymbole() == "lire");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
@@ -86,7 +87,9 @@ Noeud* Interpreteur::inst() {
         return instPour();
     } else if (m_lecteur.getSymbole() == "ecrire") {
         return instEcrire();
-    }// Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
+    } else if (m_lecteur.getSymbole() == "lire") {
+        return instLire();
+    }        // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
     else {
         erreur("Instruction incorrecte");
     }
@@ -227,7 +230,7 @@ Noeud* Interpreteur::instPour() {
 
 Noeud* Interpreteur::instEcrire() {
     // <instEcrire>::= ecrire (<expression> | <chaine> { , <excpresison> | <chaine> } )
-    NoeudInstEcrire * ecrire= new NoeudInstEcrire();
+    NoeudInstEcrire * ecrire = new NoeudInstEcrire();
     testerEtAvancer("ecrire");
     testerEtAvancer("(");
     Noeud *param;
@@ -251,4 +254,26 @@ Noeud* Interpreteur::instEcrire() {
     }
     testerEtAvancer(")");
     return ecrire;
+}
+
+
+//je ne sais pas si l'analyse syntaxique est correcte 
+//je me suis inspiré du ecrire avec des variables
+//le code compile et m'a l'air logique mais je suis pas sur
+//j'ai ajouté lire a inst() et seqInst()
+
+Noeud* Interpreteur::instLire() {
+    // <instLire>::= lire ( <variable> {,<variable>} )
+    testerEtAvancer("lire");
+    testerEtAvancer("(");
+    Noeud* var = nullptr; //variable
+    if (m_lecteur.getSymbole() == "<VARIABLE>") {
+        var = affectation();
+    }
+    while (m_lecteur.getSymbole() == ",") {
+        if (m_lecteur.getSymbole() == "<VARIABLE>") {
+            var = affectation();
+        }
+    }
+    return new NoeudInstLire();
 }

@@ -61,3 +61,4 @@ ostream & operator<<(ostream & cout, const Symbole & symbole) {
   cout << " : \"" << symbole.m_chaine << "\"";
   return cout;
 }
+
