@@ -19,7 +19,7 @@ class Noeud {
     // Classe abstraite dont dériveront toutes les classes servant à représenter l'arbre abstrait
     // Remarque : la classe ne contient aucun constructeur
 public:
-    virtual int executer() = 0; // Méthode pure (non implémentée) qui rend la classe abstraite
+virtual int executer() = 0; // Méthode pure (non implémentée) qui rend la classe abstraite
 
     virtual void ajoute(Noeud* instruction);
 

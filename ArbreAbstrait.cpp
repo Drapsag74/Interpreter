@@ -188,7 +188,7 @@ int NoeudInstEcrire::executer() {
  * j'ai essaye d'ajouter un operator >> aux classes symbole et symbole value (pour saisir)
  * mais ca n'a pas marché
  * j'ai pense a faire en sorte que l'on controle si ce qu'on met dans lire est une varibale (normal)
- * et apres on pouurait faire d'autres if pour chaque type de variable (char,string etc...)
+ * et apres on pourrait faire d'autres if pour chaque type de variable (char,string etc...)
  * mais ca m'a l'air moche
  */
 NoeudInstLire::NoeudInstLire() {
