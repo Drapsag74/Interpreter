@@ -266,14 +266,21 @@ Noeud* Interpreteur::instLire() {
     // <instLire>::= lire ( <variable> {,<variable>} )
     testerEtAvancer("lire");
     testerEtAvancer("(");
-    Noeud* var = nullptr; //variable
-    if (m_lecteur.getSymbole() == "<VARIABLE>") {
-        var = affectation();
-    }
+    Noeud* noeudLire = new NoeudInstLire();
+    tester("<VARIABLE>");
+    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+    int valeur;
+    cout << valeur << endl;     //l'utilisateur entre une valeur
+    Noeud* fact = m_table.chercheAjoute(valeur);        //facteur pour l'affectation
+    noeudLire->ajoute(new Noeud* NoeudAffectation(var, fact));
+    m_lecteur.avancer();
     while (m_lecteur.getSymbole() == ",") {
-        if (m_lecteur.getSymbole() == "<VARIABLE>") {
-            var = affectation();
-        }
+        tester("<VARIABLE>");
+        Noeud* varSuivante = m_table.chercheAjoute(m_lecteur.getSymbole());
+        cout << valeur << endl;
+        Noeud* fact = m_table.chercheAjoute(valeur);        //facteur pour l'affectation
+        noeudLire->ajoute(new Noeud* NoeudAffectation(var, fact));
+        m_lecteur.avancer();       
     }
-    return new NoeudInstLire();
+    return noeudLire;
 }

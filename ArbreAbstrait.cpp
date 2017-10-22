@@ -195,18 +195,13 @@ NoeudInstLire::NoeudInstLire() {
 
 }
 
-void NoeudInstLire::ajoute(Noeud* var) {
-    m_vars.push_back(var);
+void NoeudInstLire::ajoute(Noeud* affectation) {
+    m_affectations.push_back(affectation);
 }
 
 int NoeudInstLire::executer() {
-    for (auto var : m_vars) {
-        if ( (typeid(*var)==typeid(SymboleValue)) && *((SymboleValue*)var)=="<VARIABLE>" ) {
-            //string chaine = ((SymboleValue*)param)->getChaine();
-            //cin >> var;
-        } else {
-           //var >> var->executer();
-        }
+    for (auto affectation : m_affectations) {
+        affectation->executer();
     }
     return 0;
 }

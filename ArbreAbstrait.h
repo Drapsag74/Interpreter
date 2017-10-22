@@ -21,9 +21,7 @@ class Noeud {
 public:
     virtual int executer() = 0; // Méthode pure (non implémentée) qui rend la classe abstraite
 
-    virtual void ajoute(Noeud* instruction) {
-        throw OperationInterditeException();
-    }
+    virtual void ajoute(Noeud* instruction);
 
     virtual ~Noeud() {
     } // Présence d'un destructeur virtuel conseillée dans les classes abstraites
@@ -187,20 +185,20 @@ private:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-
-//pareil je me suis inspire de la classe lire avec un vecteur de variables
-//une fonction ajoute qui fonctionne de manière similaire à l'instruction ecrire
 class NoeudInstLire : public Noeud {
     // Classe pour représenter un noeud "instrution écrire"
     // elle contient ...
 public:
     NoeudInstLire();
-    void ajoute(Noeud* var);
     int executer() override;
+    void ajoute(Noeud* affectation) override;
     virtual ~NoeudInstLire() {}
     
 private:
-    vector<Noeud*> m_vars;
+    vector<Noeud*> m_affectations;
 };
+
+
+
 #endif /* ARBREABSTRAIT_H */
 
