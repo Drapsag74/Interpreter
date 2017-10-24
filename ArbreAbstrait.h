@@ -21,10 +21,9 @@ class Noeud {
 public:
 virtual int executer() = 0; // Méthode pure (non implémentée) qui rend la classe abstraite
 
-    virtual void ajoute(Noeud* instruction);
+    virtual void ajoute(Noeud* instruction) { throw OperationInterditeException(); }
 
-    virtual ~Noeud() {
-    } // Présence d'un destructeur virtuel conseillée dans les classes abstraites
+    virtual ~Noeud() {} // Présence d'un destructeur virtuel conseillée dans les classes abstraites
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -191,11 +190,11 @@ class NoeudInstLire : public Noeud {
 public:
     NoeudInstLire();
     int executer() override;
-    void ajoute(Noeud* affectation) override;
+    void ajoute(Noeud* variable) override;
     virtual ~NoeudInstLire() {}
     
 private:
-    vector<Noeud*> m_affectations;
+    vector<Noeud*> m_variables;
 };
 
 

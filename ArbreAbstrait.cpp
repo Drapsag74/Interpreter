@@ -138,7 +138,7 @@ int NoeudInstRepeter::executer(){
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////((SymboleValue*) m_variable)->setValeur(valeur);//////////////////////////////////////
 // NoeudInstPour
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -183,7 +183,7 @@ int NoeudInstEcrire::executer() {
 
 
 /*
- * c'est ici que ca merde
+ * c'est ici que ca foire
  * le probleme c'est que executer utlise cin sur un noeud ce qui n'est pas possible
  * j'ai essaye d'ajouter un operator >> aux classes symbole et symbole value (pour saisir)
  * mais ca n'a pas marché
@@ -195,13 +195,15 @@ NoeudInstLire::NoeudInstLire() {
 
 }
 
-void NoeudInstLire::ajoute(Noeud* affectation) {
-    m_affectations.push_back(affectation);
+void NoeudInstLire::ajoute(Noeud* variable) {
+    m_variables.push_back(variable);
 }
 
 int NoeudInstLire::executer() {
-    for (auto affectation : m_affectations) {
-        affectation->executer();
+    for (auto var : m_variables) {
+        int val;
+        cin >> val;
+        ((SymboleValue*) var)->setValeur(val);
     }
     return 0;
 }

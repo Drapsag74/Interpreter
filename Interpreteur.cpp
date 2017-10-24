@@ -73,26 +73,45 @@ Noeud* Interpreteur::seqInst() {
 
 Noeud* Interpreteur::inst() {
     // <inst> ::= <affectation>  ; | <instSi>
-    if (m_lecteur.getSymbole() == "<VARIABLE>") {
-        Noeud *affect = affectation();
-        testerEtAvancer(";");
-        return affect;
-    } else if (m_lecteur.getSymbole() == "si") {
-        return instSiRiche();
-    } else if (m_lecteur.getSymbole() == "tantque") {
-        return instTantQue();
-    } else if (m_lecteur.getSymbole() == "repeter") {
-        return instRepeter();
-    } else if (m_lecteur.getSymbole() == "pour") {
-        return instPour();
-    } else if (m_lecteur.getSymbole() == "ecrire") {
-        return instEcrire();
-    } else if (m_lecteur.getSymbole() == "lire") {
-        return instLire();
-    }        // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
-    else {
-        erreur("Instruction incorrecte");
+    try {
+
+        if (m_lecteur.getSymbole() == "<VARIABLE>") {
+            Noeud *affect = affectation();
+            testerEtAvancer(";");
+            return affect;
+        } else if (m_lecteur.getSymbole() == "si") {
+            return instSiRiche();
+        } else if (m_lecteur.getSymbole() == "tantque") {
+            return instTantQue();
+        } else if (m_lecteur.getSymbole() == "repeter") {
+            return instRepeter();
+        } else if (m_lecteur.getSymbole() == "pour") {
+            return instPour();
+        } else if (m_lecteur.getSymbole() == "ecrire") {
+            return instEcrire();
+        } else if (m_lecteur.getSymbole() == "lire") {
+            return instLire();
+        }// Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
+        else {
+            erreur("Instruction incorrecte");
+        }
+    } catch (SyntaxeException e) {
+        cout << e.what() << endl;
+        m_arbre = nullptr;
+        m_lecteur.avancer();
+        do {
+            m_lecteur.avancer();
+        } while (m_lecteur.getSymbole() != "<VARIABLE>" &&
+                m_lecteur.getSymbole() != "si" &&
+                m_lecteur.getSymbole() != "tantque" &&
+                m_lecteur.getSymbole() != "repeter" &&
+                m_lecteur.getSymbole() != "pour" &&
+                m_lecteur.getSymbole() != "ecrire" &&
+                m_lecteur.getSymbole() != "lire" &&
+                m_lecteur.getSymbole() != "<FINDEFICHIER>");
+
     }
+
 }
 
 Noeud* Interpreteur::affectation() {
@@ -269,18 +288,16 @@ Noeud* Interpreteur::instLire() {
     Noeud* noeudLire = new NoeudInstLire();
     tester("<VARIABLE>");
     Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
-    int valeur = 0;
-    cin >> valeur ;     //l'utilisateur entre une valeur
-    Noeud* fact = m_table.chercheAjoute(valeur);        //facteur pour l'affectation
-    noeudLire->ajoute(new Noeud* NoeudAffectation(var, fact));
+    //facteur pour l'affectation
+    noeudLire->ajoute(var);
     m_lecteur.avancer();
     while (m_lecteur.getSymbole() == ",") {
+        m_lecteur.avancer();
         tester("<VARIABLE>");
-        Noeud* varSuivante = m_table.chercheAjoute(m_lecteur.getSymbole());
-        cin >> valeur ;
-        Noeud* fact = m_table.chercheAjoute(valeur);        //facteur pour l'affectation
-        noeudLire->ajoute(new Noeud* NoeudAffectation(var, fact));
-        m_lecteur.avancer();       
+        var = m_table.chercheAjoute(m_lecteur.getSymbole());
+        noeudLire->ajoute(var);
+        m_lecteur.avancer();
     }
+    testerEtAvancer(")");
     return noeudLire;
 }

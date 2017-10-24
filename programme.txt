@@ -34,5 +34,14 @@ procedure principale()
 
   ecrire("Zakarya Khelif est le plus gentil des gentils #nohomo ", 3*4, " toast")
 
+  l=0;
+  m=0;
+  q=0;
+  lire(l)
+  ecrire("version simple")
+  lire(m,q)
+  r=0
+  ecrire("je ne vais pas devenir chauve")
+  g = 6
 finproc
 # Commentaire Final
