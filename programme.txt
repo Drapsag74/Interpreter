@@ -40,8 +40,8 @@ procedure principale()
   lire(l)
   ecrire("version simple")
   lire(m,q)
-  r=0
+  r=0;
   ecrire("je ne vais pas devenir chauve")
-  g = 6
+  g = 6;
 finproc
 # Commentaire Final

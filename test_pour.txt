@@ -1,0 +1,17 @@
+# Fichier de test pour
+
+#ce programme teste la boucle pour
+
+#test simple testant la boucle pour
+#resultat attendu
+# h=5
+
+procedure principale()
+    h=0;
+
+    pour( j = 0; j<5;  j = j+1)
+        h = h + 1;
+    finpour
+
+finproc
+# Commentaire Final

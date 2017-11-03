@@ -1,0 +1,31 @@
+# Fichier de test repeter
+
+#ce programme teste la boucle tant que
+
+#cas1
+#test simple, on intitie une variable a une valeur quelconque
+#on peut ensuite l'incrementer en bouclant et vérifier le resultat
+#resultat attendu
+#z = 10
+
+#cas2
+#dans la deuxieme boucle la condition est deja remplie
+#cela permet de verifier que l'instruction s'execute au moins une fois
+#resultat attendu
+#x=1
+
+procedure principale()
+
+    z = 6;
+    repeter
+        z = z+1;
+    jusqua (z != 10)
+
+    x=0;
+    y=0;
+    repeter
+        x = x+1;
+    jusqua (y == 0)
+
+finproc
+# Commentaire Final

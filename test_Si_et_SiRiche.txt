@@ -1,0 +1,48 @@
+# Fichier de test si et si riche
+
+#ce programme teste les conditionnelles "si" et "si riche"
+
+#cas 1
+#dans un premier temps nous verifions simplement qu un "si" simple fonctionne
+#via l'affectation d'une variable
+#si la variable a l'affectation attendue le "si" focntionne
+#resultat attendu
+# j=5
+
+#cas2
+#dans un second temps nous testons le "si riche" par une condition qui n'est pas vérifée
+#dans le premier "si" et qui l'est dans le deuxieme (sinonsi)
+#si  le si riche fonctionne nous devrons nous retrouver avec la bonne affectation
+#soit la deuxieme
+#resultat attendu
+# k=7
+
+#cas3
+#enfin dans le dernier cas nous retestons le "si riche" mias cette fois ci la premire
+#condition est verifiée mais la deuxième ne l'est pas ainsi la premiere affectation sera la bonne
+#et la deuxieme devra ne pas fonctionner 
+#resultat attendu
+# n=4
+procedure principale()
+    i=0;
+    j=0;
+    k=0;
+    si (i==0)
+        j=5;
+    finsi
+    l=6;
+    si (l==0)
+        j=5;
+    sinonsi (l==6)
+        k=7;
+    finsi
+    m=0;
+    n=0;
+    si (m==0)
+        n=4;
+    sinonsi (m!=0)
+        n=3;
+    finsi
+    
+finproc
+# Commentaire Final

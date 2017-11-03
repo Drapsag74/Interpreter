@@ -17,6 +17,10 @@
                    projectFiles="true">
       <itemPath>motsCles.txt</itemPath>
       <itemPath>programme.txt</itemPath>
+      <itemPath>test_Si_et_SiRiche.txt</itemPath>
+      <itemPath>test_pour.txt</itemPath>
+      <itemPath>test_repeter.txt</itemPath>
+      <itemPath>test_tantque.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -83,6 +87,14 @@
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="test_Si_et_SiRiche.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -135,6 +147,14 @@
       <item path="motsCles.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="programme.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_Si_et_SiRiche.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

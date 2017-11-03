@@ -1,0 +1,18 @@
+# Fichier de test tant que
+
+#ce programme teste la boucle tant que
+
+#ici le test est simple, il suffit de creer une varibale initiee 
+#a zero qui sera incrementée dans  une boucle conditionnée par une 
+#valeur max une fois cette valeur atteinte on sort de la boucle
+#il suffira de vérifier que la valeur de la varviable correspnd a 
+#la condition
+
+procedure principale()
+    j=0;
+    tantque (j != 36)
+        j = j+1;
+    fintantque
+
+finproc
+# Commentaire Final
