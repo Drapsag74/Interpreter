@@ -26,15 +26,15 @@ ecrire(d)
 e = 12 / 4 * 2;
 ecrire(e)
 
-f = 1 et 1;
-g = 1 et 0;
-h = 0 et 0;
-i = 0 et 1;
-k = 1 ou 1;
-l = 1 ou 0;
-m = 0 ou 0;
-n = 0 ou 1;
-p = 0 et 0 ou 1 et 1; 
+f = (1 et 1);
+g = (1 et 0);
+h = (0 et 0);
+i = (0 et 1);
+k = (1 ou 1);
+l = (1 ou 0);
+m = (0 ou 0);
+n = (0 ou 1);
+p = ((0 et 0) ou (1 et 1)); 
 
 finproc
 # Commentaire Final
