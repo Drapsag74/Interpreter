@@ -176,7 +176,7 @@ Noeud* Interpreteur::expBool() {
     Noeud* relEt = relationET();
     while ( m_lecteur.getSymbole() == "ou" ) {
         m_lecteur.avancer();
-        Noeud* relEtDroit = facteur(); // On mémorise l'opérande droit
+        Noeud* relEtDroit = relationET(); // On mémorise l'opérande droit
         relEt = new NoeudOperateurBinaire(Symbole("ou"), relEt, relEtDroit); // Et on construit un noeud opérateur binaire
     }
     return relEt; // On renvoie relEt qui pointe sur la racine de l'expression Booleenne   
