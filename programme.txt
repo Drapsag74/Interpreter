@@ -1,47 +1,40 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
+
+# résultats attendus
+# a = 7
+# b = 6
+# c = 20
+# d = 21
+# e = 6
+#les instructions "ecrire" doivent donc donner 7620216
+
 procedure principale()
-  i = 12+3;
-  si (i>14)
-    j=1;
-    k=j+i;
-  finsi
-  
-  j=0;
-  tantque (j != 36)
-    j = j+1;
-  fintantque
 
-  si (j < 2)
-    j = 10;
-  sinonsi (j == 3)
-    j = 6;
-  sinon
-    j = 100;
-  finsi
+a = 1 + 2 * 3;
+ecrire(a)
 
-  z = 6;
+b = 3 + 6 / 2;
+ecrire(b)
 
-  repeter
-    z = z+1;
-  jusqua (z != 10)
-  
-  h=0;
+c = 36 / 2 + 2;
+ecrire(c)
 
-  pour( j = 0; j<5;  j = j+1)
-    h = h + 1;
-  finpour
+d = 6 / 2 * 4 +12 - 3;
+ecrire(d)
 
-  ecrire("Zakarya Khelif est le plus gentil des gentils #nohomo ", 3*4, " toast")
+e = 12 / 4 * 2;
+ecrire(e)
 
-  l=0;
-  m=0;
-  q=0;
-  lire(l)
-  ecrire("version simple")
-  lire(m,q)
-  r=0;
-  ecrire("je ne vais pas devenir chauve")
-  g = 6;
+f = 1 et 1;
+g = 1 et 0;
+h = 0 et 0;
+i = 0 et 1;
+k = 1 ou 1;
+l = 1 ou 0;
+m = 0 ou 0;
+n = 0 ou 1;
+p = 0 et 0 ou 1 et 1; 
+
 finproc
 # Commentaire Final

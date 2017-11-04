@@ -1,18 +1,28 @@
-# Fichier de test
+# Fichier de test des priorités des opérateurs
+
+#résultats attendus
+# a = 7
+# b = 6
+# c = 20
+# d = 21
+# e = 6
+
 procedure principale()
-a = 1;
-b = 2;
 
-c = 1 + b * 3;
+a = 1 + 2 * 3;
+ecrire(a)
 
+b = 3 + 6 / 2;
+ecrire(b)
+
+c = 36 / 2 + 2;
 ecrire(c)
 
-a=5;
-b=3;
-c=0;
+d = 6 / 2 * 4 +12 - 3;
+ecrire(d)
 
-c = a + 6 / 2;
+e = 12 / 4 * 2;
+ecrire(e)
 
-ecrire(c)
 finproc
 # Commentaire Final
