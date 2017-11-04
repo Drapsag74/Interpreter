@@ -19,6 +19,7 @@
       <itemPath>programme.txt</itemPath>
       <itemPath>test_Si_et_SiRiche.txt</itemPath>
       <itemPath>test_pour.txt</itemPath>
+      <itemPath>test_prioritéeOp.txt</itemPath>
       <itemPath>test_repeter.txt</itemPath>
       <itemPath>test_tantque.txt</itemPath>
     </logicalFolder>
@@ -91,6 +92,8 @@
       </item>
       <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="test_prioritéeOp.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
@@ -151,6 +154,8 @@
       <item path="test_Si_et_SiRiche.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_pour.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_prioritéeOp.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
       </item>
