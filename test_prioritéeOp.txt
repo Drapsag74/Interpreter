@@ -1,5 +1,18 @@
+# Fichier de test
+procedure principale()
 a = 1;
 b = 2;
 
 c = 1 + b * 3;
-Ecrire(c);
+
+ecrire(c)
+
+a=5;
+b=3;
+c=0;
+
+c = a + 6 / 2;
+
+ecrire(c)
+finproc
+# Commentaire Final
