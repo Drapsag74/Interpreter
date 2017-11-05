@@ -25,7 +25,7 @@ procedure principale()
     y=0;
     repeter
         x = x+1;
-    jusqua (y == 0)
+    jusqua ((y == 0))
 
 finproc
 # Commentaire Final

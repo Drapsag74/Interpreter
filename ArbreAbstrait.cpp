@@ -5,6 +5,7 @@
 #include "Exceptions.h"
 #include <iostream>
 #include <typeinfo>
+#include <memory>
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
@@ -23,6 +24,15 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
     if (instruction != nullptr) m_instructions.push_back(instruction);
 }
 
+
+void NoeudSeqInst::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    for (auto instruction : m_instructions) {
+        instruction->traduitEnCPP(cout, indentation);
+        cout << endl;
+    }
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudAffectation
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +45,15 @@ int NoeudAffectation::executer() {
     int valeur = m_expression->executer(); // On exécute (évalue) l'expression
     ((SymboleValue*) m_variable)->setValeur(valeur); // On affecte la variable
     return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudAffectation::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    int valeur = m_expression->executer(); // On exécute (évalue) l'expression
+    ((SymboleValue*) m_variable)->setValeur(valeur); // On affecte la variable
+    cout << setw(4*indentation)<<"";
+    cout << (((SymboleValue*)m_variable)->getChaine()) << " = ";
+    m_expression->traduitEnCPP(cout, 0); //on traduit l'expression en cpp avec une indentation de 0 car sur la même ligne
+    if (indentation != 0) cout << ";";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,6 +88,25 @@ int NoeudOperateurBinaire::executer() {
     return valeur; // On retourne la valeur calculée
 }
 
+
+void NoeudOperateurBinaire::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    string operateur;
+    if(this->m_operateur == "et") {
+        operateur = "&&";
+    } else if (this->m_operateur == "ou") {
+        operateur = "||";
+    }else if (this->m_operateur == "non") {
+        operateur = "!";
+    } else {
+        operateur = this->m_operateur.getChaine();
+    }
+    cout << setw(4*indentation)<<"";
+    m_operandeGauche->traduitEnCPP(cout, 0); // On traduit l'opérande gauche
+    cout << " " << operateur << " "; 
+    m_operandeDroit->traduitEnCPP(cout, 0); // On traduit l'opérande droit
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstSi
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +123,19 @@ int NoeudInstSi::executer() {
     return 0;                       // on retourne 0 sinon
 }
 
+void NoeudInstSi::traduitEnCPP(ostream & cout,unsigned int indentation) const {
+    cout << setw(4*indentation)<<""<<"if (";
+    // Ecrit "if (" avec un décalage de 4*indentation espaces 
+    m_condition->traduitEnCPP( cout, 0);
+    // Traduit la condition en C++ sans décalage 
+    cout << ") {"<< endl;
+    // Ecrit ") {" et passe à la ligne 
+    m_sequence->traduitEnCPP(cout, indentation+1);
+    // Traduit en C++ la séquence avec indentation augmentée 
+    cout << setw(4*indentation)<< "" << "}" << endl;
+    // Ecrit "}" avec l'indentation initiale et passe à la ligne 
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +149,19 @@ int NoeudInstTantQue::executer() {
         m_sequence->executer();
     }
     return 0;
+}
+
+void NoeudInstTantQue::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation)<<""<<"while (";
+    // Ecrit "if (" avec un décalage de 4*indentation espaces 
+    m_condition->traduitEnCPP( cout, 0);
+    // Traduit la condition en C++ sans décalage 
+    cout << ") {"<< endl;
+    // Ecrit ") {" et passe à la ligne 
+    m_sequence->traduitEnCPP(cout, indentation+1);
+    // Traduit en C++ la séquence avec indentation augmentée 
+    cout << setw(4*indentation)<< "" << "}" << endl;
+    // Ecrit "}" avec l'indentation initiale et passe à la ligne 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -120,6 +184,14 @@ int NoeudInstSiRiche::executer() {
     return 0;
 }
 
+void NoeudInstSiRiche::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    m_instSis[0]->traduitEnCPP(cout, indentation);
+    for (int i = 1; i < m_instSis.size(); i++) {
+        cout << setw(4*indentation)<<"";
+        cout << "else ";
+        m_instSis[1]->traduitEnCPP(cout,0); // on ajoute if sans indentation
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstRepeter
 ////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +210,14 @@ int NoeudInstRepeter::executer(){
 }
 
 
+void NoeudInstRepeter::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation)<<"" << "do {" << endl;
+    m_sequence->traduitEnCPP(cout, indentation+1);
+    cout << setw(4*indentation)<<"" << "} while (";
+    m_condition->traduitEnCPP(cout, 0); //on met la condition avec une indentation de 0 après le while (
+    cout << ");" << endl;
+}
+
 //////////////////////////////////////////((SymboleValue*) m_variable)->setValeur(valeur);//////////////////////////////////////
 // NoeudInstPour
 ////////////////////////////////////////////////////////////////////////////////
@@ -152,6 +232,18 @@ int NoeudInstPour::executer(){
         m_sequence->executer();
     }
     return 0;
+}
+
+void NoeudInstPour::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation)<<"" << "for (";
+    m_affectation1->traduitEnCPP(cout, 0);
+    cout << "; ";
+    m_condition->traduitEnCPP(cout, 0);
+    cout << "; ";
+    m_affectation2->traduitEnCPP(cout,0);
+    cout << ") {" << endl;
+    m_sequence->traduitEnCPP(cout, indentation+1);
+    cout << "}" << endl;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -177,6 +269,15 @@ int NoeudInstEcrire::executer() {
     return 0;
 }
 
+void NoeudInstEcrire::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation)<<"" << "cout << ";
+    for(int i; i < m_params.size()-1; i++) {
+        m_params[i]->traduitEnCPP(cout, 0);
+        cout << " << ";
+    }
+    m_params[m_params.size()-1]->traduitEnCPP(cout, 0);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstLire
 ////////////////////////////////////////////////////////////////////////////////
@@ -199,4 +300,6 @@ int NoeudInstLire::executer() {
     return 0;
 }
 
-
+void NoeudInstLire::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    
+}

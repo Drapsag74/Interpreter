@@ -13,6 +13,9 @@ public:
 	bool operator == (const string & ch) const ; // Pour tester l'égalité entre le symbole et une chaîne
 	inline bool operator != (const string  & ch) const { return ! (*this == ch); } // Pour tester la différence...
 	inline const string & getChaine() const { return m_chaine;} // Accesseur
+        inline bool estUneVariable() const { return m_categorie == Symbole::VARIABLE;}
+        //inline bool estUnEntier() const {return m_categorie == Symbole::ENTIER;}
+        //inline bool estUneChaine() const {return m_categorie == Symbole::CHAINE;}
 	friend ostream & operator <<(ostream & cout, const Symbole & symbole); // Fonction amie pour pouvoir afficher un symbole sur cout 
         
 

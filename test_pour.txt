@@ -9,7 +9,7 @@
 procedure principale()
     h=0;
 
-    pour( j = 0; j<5;  j = j+1)
+    pour( j = 0; (j<5);  j = j+1)
         h = h + 1;
     finpour
 

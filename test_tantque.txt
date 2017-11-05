@@ -10,7 +10,7 @@
 
 procedure principale()
     j=0;
-    tantque (j != 36)
+    tantque ((j != 36))
         j = j+1;
     fintantque
 

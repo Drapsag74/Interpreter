@@ -14,6 +14,30 @@ void Interpreteur::analyse() {
     m_arbre = programme(); // on lance l'analyse de la première règle
 }
 
+//methode pour la traduction en c++
+
+void Interpreteur::traduitEnCPP(ostream & cout, unsigned int indentation)const {
+    cout << "#include <iostream>" << endl << endl;
+    cout << setw(4 * indentation) << "" << "int main() {" << endl << endl;
+    // Début d’un programme C++
+    // Ecrire en C++ la déclaration des variables présentes dans le programme... 
+    // ... variables dont on retrouvera le nom en parcourant la table des symboles ! 
+    // Par exemple, si le programme contient i,j,k, il faudra écrire : int i; int j; int k; ... 
+    cout << "//##################################################" << endl;
+    cout << "//#############declaration des variables############" << endl;
+    cout << "//##################################################" <<endl;
+    for (int i = 0; i < getTable().getTaille(); i++) {
+        Symbole symbole = getTable()[i];
+        if (symbole.estUneVariable())  cout << "int " << symbole.getChaine() << "; ";
+    }
+    cout <<endl << "//##################################################" << endl << endl;
+    cout << "//début du programme" <<endl <<endl;
+    getArbre()->traduitEnCPP(cout, indentation + 1);
+    // lance l'opération traduitEnCPP sur la racine
+    cout << setw(4 * (indentation + 1)) << "" << "return 0;" << endl;
+    cout << setw(4 * indentation) << "}" << endl; // Fin d’un programme C++
+}
+
 void Interpreteur::tester(const string & symboleAttendu) const throw (SyntaxeException) {
     // Teste si le symbole courant est égal au symboleAttendu... Si non, lève une exception
     static char messageWhat[256];
@@ -127,7 +151,7 @@ Noeud* Interpreteur::affectation() {
 Noeud* Interpreteur::expression() {
     // <expression> ::= <terme> { + <terme> | - <terme> }
     Noeud* trm = terme();
-    while ( m_lecteur.getSymbole() == "+" || m_lecteur.getSymbole() == "-" ) {
+    while (m_lecteur.getSymbole() == "+" || m_lecteur.getSymbole() == "-") {
         Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
         m_lecteur.avancer();
         Noeud* tDroit = terme(); // On mémorise l'opérande droit
@@ -139,7 +163,7 @@ Noeud* Interpreteur::expression() {
 Noeud* Interpreteur::terme() {
     // <terme> ::= <facteur> { * <facteur> | / <facteur> }
     Noeud* fact = facteur();
-    while ( m_lecteur.getSymbole() == "*" || m_lecteur.getSymbole() == "/" ) {
+    while (m_lecteur.getSymbole() == "*" || m_lecteur.getSymbole() == "/") {
         Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
         m_lecteur.avancer();
         Noeud* factDroit = facteur(); // On mémorise l'opérande droit
@@ -147,7 +171,6 @@ Noeud* Interpreteur::terme() {
     }
     return fact; // On renvoie fact qui pointe sur la racine du terme
 }
-
 
 Noeud* Interpreteur::facteur() {
     // <facteur> ::= <entier>  |  <variable>  |  - <expBool>  | non <expBool> | ( <expBool> )
@@ -174,7 +197,7 @@ Noeud* Interpreteur::facteur() {
 Noeud* Interpreteur::expBool() {
     // <expBool> ::= <relationET> { ou <relationET> }
     Noeud* relEt = relationET();
-    while ( m_lecteur.getSymbole() == "ou" ) {
+    while (m_lecteur.getSymbole() == "ou") {
         m_lecteur.avancer();
         Noeud* relEtDroit = relationET(); // On mémorise l'opérande droit
         relEt = new NoeudOperateurBinaire(Symbole("ou"), relEt, relEtDroit); // Et on construit un noeud opérateur binaire
@@ -185,7 +208,7 @@ Noeud* Interpreteur::expBool() {
 Noeud* Interpreteur::relationET() {
     // <relationET> ::= <relation> { et <relation> }
     Noeud* rel = relation();
-    while ( m_lecteur.getSymbole() == "et" ) {
+    while (m_lecteur.getSymbole() == "et") {
         m_lecteur.avancer();
         Noeud* relDroit = relation(); // On mémorise l'opérande droit
         rel = new NoeudOperateurBinaire(Symbole("et"), rel, relDroit); // Et on construit un noeud opérateur binaire
@@ -197,8 +220,9 @@ Noeud* Interpreteur::relation() {
     // <relation> ::= <expression> { <opRel> <expression> }
     // <opRel> ::= <= | >= | == | !=
     Noeud* expr = expression();
-    while ( m_lecteur.getSymbole() == "<=" ||m_lecteur.getSymbole() == ">=" ||
-            m_lecteur.getSymbole() == "==" || m_lecteur.getSymbole() == "!=" ) {
+    while ( m_lecteur.getSymbole() == "<"  || m_lecteur.getSymbole() == ">"  ||
+            m_lecteur.getSymbole() == "<=" || m_lecteur.getSymbole() == ">=" ||
+            m_lecteur.getSymbole() == "==" || m_lecteur.getSymbole() == "!=") {
         Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
         m_lecteur.avancer();
         Noeud* exprDroit = expression(); // On mémorise l'opérande droit
