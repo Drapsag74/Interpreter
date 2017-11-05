@@ -1,0 +1,11 @@
+# Fichier de test si
+
+procedure principale()
+    i=0;
+    j=0;
+    si (i==0)
+        j=5;
+    finsi
+    
+finproc
+# Commentaire Final
