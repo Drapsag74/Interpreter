@@ -367,3 +367,33 @@ Noeud* Interpreteur::instLire() {
     testerEtAvancer(")");
     return noeudLire;
 }
+
+Noeud* Interpreteur::instSelon() {
+    
+    Noeud* instSelon = new NoeudInstSelon(); //instruction rendue
+    testerEtAvancer("selon");
+    testerEtAvancer("(");
+    tester("<VARIABLE>");//peut etre mettre entier?
+    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+    m_lecteur.avancer();
+    testerEtAvancer(")");
+    
+    do {
+        testerEtAvancer("cas");
+        tester("<ENTIER>");
+        Noeud* numeroCas = m_table.chercheAjoute(m_lecteur.getSymbole());
+        Noeud* node = new NoeudOperateurBinaire(Symbole("=="),var,numeroCas);
+        m_lecteur.avancer();
+        testerEtAvancer(":");
+        instSelon->ajoute(seqInst());
+    }
+    while ( m_lecteur.getSymbole() == "cas");
+    
+    if (m_lecteur.getSymbole() == "defaut") {
+        testerEtAvancer("defaut");
+        testerEtAvancer(":");
+        instSelon->ajoute(seqInst());
+    }
+    testerEtAvancer("finSelon");
+    return instSelon;
+}
