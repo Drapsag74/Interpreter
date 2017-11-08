@@ -7,14 +7,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/TableSymboles.h</file>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/TableSymboles.cpp</file>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/testSi.txt</file>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/main.cpp</file>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/tests/newtestrunner.cpp</file>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/Interpreteur.cpp</file>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/tests/TestSi.h</file>
-            <file>file:/users/info/etu-s3/khelifza/Cours/M3105%20-%20C++/tp01/tp05/schoolCompiler/tests/TestSi.cpp</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/test_tantque.txt</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/Symbole.cpp</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/test_Si_SiRiche.txt</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/SymboleValue.h</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/test_repeter.txt</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/TableSymboles.h</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/SymboleValue.cpp</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/ArbreAbstrait.cpp</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/ArbreAbstrait.h</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/Interpreteur.h</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/Symbole.h</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/programme.txt</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/Lecteur.h</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/test_pour.txt</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/main.cpp</file>
+            <file>file:/home/typs/NetBeansProjects/schoolCompiler/Interpreteur.cpp</file>
         </group>
     </open-files>
 </project-private>

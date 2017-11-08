@@ -30,8 +30,9 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" programme.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -i programme.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -c programme.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -i test_selon.txt</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" -c programme.txt</runcommand>
+        <runcommand>"${OUTPUT_PATH}" -i test_selon.txt</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

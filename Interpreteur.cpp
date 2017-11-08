@@ -89,7 +89,8 @@ Noeud* Interpreteur::seqInst() {
             m_lecteur.getSymbole() == "repeter" ||
             m_lecteur.getSymbole() == "pour" ||
             m_lecteur.getSymbole() == "ecrire" ||
-            m_lecteur.getSymbole() == "lire");
+            m_lecteur.getSymbole() == "lire" ||
+            m_lecteur.getSymbole() == "selon" );
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
@@ -115,7 +116,9 @@ Noeud* Interpreteur::inst() {
             return instEcrire();
         } else if (m_lecteur.getSymbole() == "lire") {
             return instLire();
-        }// Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
+        } else if (m_lecteur.getSymbole() == "selon" ) {
+            return instSelon();
+        } // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
         else {
             erreur("Instruction incorrecte");
         }
@@ -132,6 +135,7 @@ Noeud* Interpreteur::inst() {
                 m_lecteur.getSymbole() != "pour" &&
                 m_lecteur.getSymbole() != "ecrire" &&
                 m_lecteur.getSymbole() != "lire" &&
+                m_lecteur.getSymbole() != "selon" &&
                 m_lecteur.getSymbole() != "<FINDEFICHIER>");
 
     }
@@ -368,32 +372,33 @@ Noeud* Interpreteur::instLire() {
     return noeudLire;
 }
 
-Noeud* Interpreteur::instSelon() {
-    
-    Noeud* instSelon = new NoeudInstSelon(); //instruction rendue
+/////////////////////Selon ne marche pas
+/*Noeud* Interpreteur::instSelon() {
     testerEtAvancer("selon");
+    Noeud* instSelon = new NoeudInstSelon(); //instruction rendue
     testerEtAvancer("(");
-    tester("<VARIABLE>");//peut etre mettre entier?
+    tester("<VARIABLE>");
     Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
     m_lecteur.avancer();
     testerEtAvancer(")");
     
-    do {
-        testerEtAvancer("cas");
+    while (m_lecteur.getSymbole() == "cas") {
+        m_lecteur.avancer();
         tester("<ENTIER>");
-        Noeud* numeroCas = m_table.chercheAjoute(m_lecteur.getSymbole());
-        Noeud* node = new NoeudOperateurBinaire(Symbole("=="),var,numeroCas);
+        Noeud* cas = new NoeudOperateurBinaire(Symbole("=="),var, m_table.chercheAjoute(m_lecteur.getSymbole()));
         m_lecteur.avancer();
         testerEtAvancer(":");
-        instSelon->ajoute(seqInst());
+        Noeud* sequence = seqInst();      
+        instSelon->ajoute(new NoeudInstSi(cas, sequence));
+        
     }
-    while ( m_lecteur.getSymbole() == "cas");
-    
+        
     if (m_lecteur.getSymbole() == "defaut") {
         testerEtAvancer("defaut");
         testerEtAvancer(":");
-        instSelon->ajoute(seqInst());
+        Noeud* sequence = seqInst();
+        instSelon->ajoute(new NoeudInstSi(m_table.chercheAjoute(Symbole("1")), sequence));
     }
     testerEtAvancer("finSelon");
     return instSelon;
-}
+}*/

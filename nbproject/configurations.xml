@@ -22,6 +22,7 @@
       <itemPath>test_pour.txt</itemPath>
       <itemPath>test_prioritéeOp.txt</itemPath>
       <itemPath>test_repeter.txt</itemPath>
+      <itemPath>test_selon.txt</itemPath>
       <itemPath>test_tantque.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
@@ -121,6 +122,8 @@
       </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="test_selon.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/TestSi.cpp" ex="false" tool="1" flavor2="0">
@@ -205,6 +208,8 @@
       <item path="test_prioritéeOp.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_repeter.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_selon.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_tantque.txt" ex="false" tool="3" flavor2="0">
       </item>

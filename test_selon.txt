@@ -1,0 +1,9 @@
+procedure principale()
+    a = 0;
+    i = 0;
+    selon (i)
+        cas 1 : a = 1;
+        cas 2 : a = 2;
+        defaut : a = 1000;
+    finselon
+finproc

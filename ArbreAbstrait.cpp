@@ -308,3 +308,27 @@ void NoeudInstLire::traduitEnCPP(ostream& cout, unsigned int indentation) const 
 // NoeudInstSelon
 ////////////////////////////////////////////////////////////////////////////////
 
+NoeudInstSelon::NoeudInstSelon() {
+
+}
+
+void NoeudInstSelon::ajoute(Noeud* instSi) {
+    m_instSis.push_back(instSi);
+}
+
+int NoeudInstSelon::executer() {
+    int exec=0;
+    for (int i=0; i < m_instSis.size() && !exec; i++) { // on parcours le tableau et on vérifie que aucun si n'a été exécuté (exec = 0)
+        exec = m_instSis[i] -> executer();
+    }
+    return 0;
+}
+
+void NoeudInstSelon::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    m_instSis[0]->traduitEnCPP(cout, indentation);
+    for (int i = 1; i < m_instSis.size(); i++) {
+        cout << setw(4*indentation)<<"";
+        cout << "else ";
+        m_instSis[1]->traduitEnCPP(cout,0); // on ajoute if sans indentation
+    }
+}

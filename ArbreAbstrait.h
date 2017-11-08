@@ -217,17 +217,18 @@ class NoeudInstSelon : public Noeud {
     // Classe pour représenter un noeud "instrution Selon"
     
 public:
-    //NoeudInstSelon(Noeud* variable, Noeud* casNum, Noeud* sequence,std::vector<Noeud*> cas, Noeud* defaut);
+    NoeudInstSelon();
+    void ajoute(Noeud* instSi) override;
     int executer();
-    //void traduitEnCPP... si tu veux le faire
+    void traduitEnCPP(ostream& cout, unsigned int indentation) const override;
+    virtual ~NoeudInstSelon() {}
     
 private :
-    /*Noeud* m_variable;
-    Noeud* m_casNum;
-    Noeud* m_sequence;
-    std::vector<Noeud*> m_cas;
-    Noeud* m_defaut;*/
+    std::vector<Noeud*> m_instSis;
 };
+
+//////////////////////////////
+
 
 
 #endif /* ARBREABSTRAIT_H */
